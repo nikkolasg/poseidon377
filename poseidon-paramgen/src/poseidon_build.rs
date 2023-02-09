@@ -124,7 +124,7 @@ fn serialize_slice_f<F: PrimeField>(elements: &[F]) -> String {
         // is not in decimal: see https://github.com/arkworks-rs/algebra/issues/320
         let elem_bigint: BigUint = (*elem).into();
         new_str.push_str("F::from_str(\"");
-        new_str.push_str(&format!("{}", elem_bigint).to_string());
+        new_str.push_str(&format!("{elem_bigint}").to_string());
         new_str.push_str("\").map_err(|_| ()).unwrap(), ");
     }
     // Remove the trailing ", "
@@ -140,7 +140,7 @@ fn serialize_slice_of_vecs_f<F: PrimeField>(elements: &[Vec<F>]) -> String {
         for c in r {
             let elem_bigint: BigUint = (*c).into();
             new_str.push_str("F::from_str(\"");
-            new_str.push_str(&format!("{}", elem_bigint).to_string());
+            new_str.push_str(&format!("{elem_bigint}").to_string());
             new_str.push_str("\").map_err(|_| ()).unwrap(), ");
         }
     }
@@ -154,7 +154,7 @@ fn serialize_slice_of_vecs_f<F: PrimeField>(elements: &[Vec<F>]) -> String {
 fn serialize_f<F: PrimeField>(single_element: &F) -> String {
     let mut new_str = "F::from_str(\"".to_string();
     let elem_bigint: BigUint = (*single_element).into();
-    new_str.push_str(&format!("{}", elem_bigint));
+    new_str.push_str(&format!("{elem_bigint}"));
     new_str.push_str("\").map_err(|_| ()).unwrap()");
     new_str
 }
